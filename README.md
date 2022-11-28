@@ -38,11 +38,19 @@ Workshop Activities
 **Query Exercises**
 - Attempt these queries (solutions below)
 - RediSearch
-    - Brewery from United State with a name starting with Sn
-    - All Breweries in the state of California
-    - All Breweries in the state of Florida, Atlanta and New York
-    - All Breweries in the East Coast
-    - Total Count of Breweries in the West Coast
+    - Get the beers that have IPA in a field
+    - Get the beers that are “North American Ales”
+    - Get the beers with “Amreica” as the style (note the misspelling)
+    - Get the beers that have a category of Lager
+    - Get the beers that have a style of Lager but omit Amber
+    - Get the beers that have an abv between 4 and 8
+    - Find your favorite beer
+    - Find all the beers of your favorite category
+    - Find all the beers of your favorite category at your favorite brewery
+    - Find all of the beers where the ABV is greater than 4.5
+    - Find all the beers that have a style of Lager but omit Amber AND have an ABV between 6 and 10
+
+
 - RedisJSON
     - Male senators over 50 years old
     - Female senators born in 1947
@@ -64,3 +72,35 @@ Follow up
 
 - Share Repo
 - Office Hours Schedule
+
+
+Solutions
+---------------------------------------------------
+
+**RediSearch**
+- Get the beers that have IPA in a field:
+FT.SEARCH "idx:beers" IPA
+- Get the beers that are “North American Ales”:
+FT.SEARCH "idx:categories" “North American Ales”
+- Get the beers with “Amreica” as the style (note the misspelling):
+FT.SEARCH "idx:styles" Amreica
+- Get the beers that have a category of Lager:
+FT.SEARCH "idx:categories" Lager
+- Get the beers that have a style of Lager but omit Amber:
+FT.SEARCH "idx:styles" "Lager -Amber"
+- Get the beers that have an abv between 4 and 8:
+FT.SEARCH idx:beers "@abv:[4 8]"
+- Find your favorite beer
+FT.Search idx:beers Pils
+- Find all the beers of your favorite category
+FT.Search idx:styles Pilsner
+- Find all the beers of your favorite category at your favorite brewery
+FT.SEARCH "idx:beers" "@category:Lager @brewery:Boulevard Brewing Company"
+- Find all of the beers where the ABV is greater than 4.5
+FT.SEARCH idx:beers "@abv:[(4 inf]"
+- Find all the beers that have a style of Lager but omit Amber AND have an ABV between 6 and 10
+FT.SEARCH idx:beers "@abv:[6 10] @style:Lager -Amber"
+
+**RedisJSON**
+- Query
+
