@@ -15,7 +15,7 @@ Redis Application Workshop Outline
 ------------------------------------------
 
 - **Level Set**
-  - https://docs.google.com/presentation/d/1QAq8o_e3Oqgz1Fgp7cyRDi1OebEuC2f5c2j2nRDSVPw/edit?usp=sharing
+  - **Deck:** https://docs.google.com/presentation/d/1QAq8o_e3Oqgz1Fgp7cyRDi1OebEuC2f5c2j2nRDSVPw/edit?usp=sharing
 - **Portal Tour/Demo**
   - https://portal.azure.com/
 - **Workshop Activity**
@@ -24,17 +24,33 @@ Redis Application Workshop Outline
     	- https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-how-to-active-geo-replication
 - **Extended Data Types (focus Search + JSON)**
   - https://docs.google.com/presentation/d/1V7IECKTPcNQnIrktSxSy7FxlawW4zIHw/edit?usp=sharing&ouid=102108161234886405976&rtpof=true&sd=true
-- **Workshop Activity**
-	- Access Cluster
-		- Connect to own cluster w/Redis Insight 
-    		- Download and install https://redis.com/redis-enterprise/redis-insight/
-        		- Get endpoints and keys
-        		- Set up cluster connection in Redis Insight
-			- Set exercise
-			- Access both clusters to see AA
-		- Query Exercises
-			- RediSearch
-			- RedisJSON
+
+Workshop Activities
+--------------------------------------------------
+- Access Cluster
+- Connect to own cluster w/Redis Insight 
+  		- Download and install https://redis.com/redis-enterprise/redis-insight/
+      		- Get endpoints and keys
+      		- Set up cluster connection in Redis Insight
+	- Set exercise
+	- Access both clusters to see AA
+  
+**Query Exercises**
+- Attempt these queries (solutions below)
+- RediSearch
+	- Male senators over 50 years old
+    - Female senators born in 1947
+    - Brewery from United State with a name starting with Sn
+    - All Breweries in the state of California
+    - Senators with the name that sounds like Frank (Not sure if we want to show phonic search)
+    - All Breweries in the state of Florida, Atlanta and New York
+    - All Breweries in the East Coast
+    - Total Count of Senators in the East Coast
+    - Total Count of Breweries in the West Coast
+    - Senators born after 1947 and name not starting with F
+- RedisJSON
+    - 
+
 - **Write Behind Demo**
 	- Walkthrough
   
