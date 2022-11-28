@@ -10,9 +10,6 @@ This is the publicly available repo for MS Learn Level 300 workshop
 **Expected Infrastructure:**
 - Cluster Group for AA
 - Redis Cluster w/Search + JSON
-- Seed Data
-  - https://developer.redis.com/explore/redisinsight/redisearch/
-  - https://www.govtrack.us/api/v2/role?current=true&role_type=senator
   
 Redis Application Workshop Outline
 ------------------------------------------
@@ -25,7 +22,7 @@ Redis Application Workshop Outline
 	- Stand up ACRE (AA)
     	- https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/quickstart-create-redis-enterprise
     	- https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-how-to-active-geo-replication
-- **Extended Data Types (focus Search + JSON) **
+- **Extended Data Types (focus Search + JSON)**
   - https://docs.google.com/presentation/d/1V7IECKTPcNQnIrktSxSy7FxlawW4zIHw/edit?usp=sharing&ouid=102108161234886405976&rtpof=true&sd=true
 - **Workshop Activity**
 	- Access Cluster
@@ -38,8 +35,17 @@ Redis Application Workshop Outline
 		- Query Exercises
 			- RediSearch
 			- RedisJSON
-- **Write Behind Demo **
-	- Demo
-	- Share Repo
-	- Office Hours Follow Up
+- **Write Behind Demo**
+	- Walkthrough
+  
 - **Tear Down cluster assets**
+
+Follow up
+--------------------------------------------------
+
+- Seed Data
+  - https://developer.redis.com/explore/redisinsight/redisearch/
+  - https://www.govtrack.us/api/v2/role?current=true&role_type=senator
+
+- Share Repo
+- Office Hours Schedule
