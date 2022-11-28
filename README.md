@@ -29,10 +29,10 @@ Redis Application Workshop Outline
   - https://docs.google.com/presentation/d/1V7IECKTPcNQnIrktSxSy7FxlawW4zIHw/edit?usp=sharing&ouid=102108161234886405976&rtpof=true&sd=true
 - **Workshop Activity**
 	- Access Cluster
-		- connect to own cluster w/Redis Insight 
-    		- download and install https://redis.com/redis-enterprise/redis-insight/
+		- Connect to own cluster w/Redis Insight 
+    		- Download and install https://redis.com/redis-enterprise/redis-insight/
         		- Get endpoints and keys
-        		- set up cluster connection in Redis Insight
+        		- Set up cluster connection in Redis Insight
 			- Set exercise
 			- Access both clusters to see AA
 		- Query Exercises
