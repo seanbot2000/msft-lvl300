@@ -1,13 +1,19 @@
 import json
 import argparse
 import redis
+import re
 from redis.commands.json.path import Path
 
 def load():
-    f = open('senators.json')
+    f = open('../data/senators.json')
     data = json.load(f)
     f.close()
     return data
+
+def parseState(state):
+    abbr = re.split("\[(.*?)\]", state, 1)
+    print(abbr)
+    return abbr
 
 def main():
     
@@ -30,6 +36,7 @@ def main():
     for d in data['objects']:
         sid = d["person"]["cspanid"]
         party = d["party"]
+        state = parseState(d["person"]["name"])
         # delete
         r.delete('senator:' + party + ':' + str(sid))
         r.delete('senator:' + str(sid))
@@ -37,6 +44,7 @@ def main():
             'enddate': d["enddate"],
             'address': d["extra"]["address"],
             'office': d["extra"]["office"],
+            'state' : state,
             'details' : {
                 'birthday': d["person"]["birthday"],
                 'gender': d["person"]["gender"],

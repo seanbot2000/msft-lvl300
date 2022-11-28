@@ -27,7 +27,7 @@ def main(mytimer: func.TimerRequest) -> None:
     
     url = 'lvl300.eastus2.redisenterprise.cache.azure.net'
     port = 10000
-    password = 'kM6ntsszed57SHRKk1xpiNxNnqCt6gkLhiTglrp8NRU='
+    password = ''
 
     # Set up Redis connection
     r = redis.StrictRedis(host=url, port=port, password=password)

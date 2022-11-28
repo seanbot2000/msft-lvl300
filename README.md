@@ -61,7 +61,8 @@ Workshop Activities
 **Write Behind Demo**
   - Walkthrough
   
-**Tear Down cluster assets**
+**Lastly**
+- Tear Down cluster assets!
 
 Follow up
 --------------------------------------------------
