@@ -6,7 +6,6 @@ import redis
 
 from redis.commands.json.path import Path
 from urllib.request import Request, urlopen
-import azure.functions as func
 
 def location():
     req = Request("http://api.open-notify.org/iss-now.json")
@@ -15,14 +14,14 @@ def location():
     location = json.loads(response.read())
 
     print(location['timestamp'])
-    print(location['iss_position']['latitude'], location['iss_position']['latitude'])
+    print(location['iss_position']['latitude'], location['iss_position']['longitude'])
 
     return location
 
-def main(mytimer: func.TimerRequest) -> None:
+def main():
     utc_timestamp = datetime.datetime.utcnow().replace(
         tzinfo=datetime.timezone.utc).isoformat()
-
+        
     iss  = location()
     
     url = 'lvl300.eastus2.redisenterprise.cache.azure.net'
@@ -36,7 +35,7 @@ def main(mytimer: func.TimerRequest) -> None:
 
     r.close()
 
-    if mytimer.past_due:
-        logging.info('The timer is past due!')
+    print('Python function ran at ' + utc_timestamp)
 
-    logging.info('Python timer trigger function ran at %s', utc_timestamp)
+if __name__=="__main__":
+    main()
