@@ -23,7 +23,7 @@ Redis Application Workshop Outline
     	- https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/quickstart-create-redis-enterprise
     	- https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-how-to-active-geo-replication
 - **Extended Data Types (focus Search + JSON)**
-  - https://docs.google.com/presentation/d/1V7IECKTPcNQnIrktSxSy7FxlawW4zIHw/edit?usp=sharing&ouid=102108161234886405976&rtpof=true&sd=true
+  - (Deck continuing) https://docs.google.com/presentation/d/1QAq8o_e3Oqgz1Fgp7cyRDi1OebEuC2f5c2j2nRDSVPw/edit?usp=sharing
 
 Workshop Activities
 --------------------------------------------------
