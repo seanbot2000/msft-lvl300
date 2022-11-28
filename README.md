@@ -27,7 +27,7 @@ Redis Application Workshop Outline
 
 Workshop Activities
 --------------------------------------------------
-- Access Cluster
+**Access Cluster**
 - Connect to own cluster w/Redis Insight 
   		- Download and install https://redis.com/redis-enterprise/redis-insight/
       		- Get endpoints and keys
@@ -38,23 +38,22 @@ Workshop Activities
 **Query Exercises**
 - Attempt these queries (solutions below)
 - RediSearch
-	- Male senators over 50 years old
-    - Female senators born in 1947
     - Brewery from United State with a name starting with Sn
     - All Breweries in the state of California
-    - Senators with the name that sounds like Frank (Not sure if we want to show phonic search)
     - All Breweries in the state of Florida, Atlanta and New York
     - All Breweries in the East Coast
-    - Total Count of Senators in the East Coast
     - Total Count of Breweries in the West Coast
-    - Senators born after 1947 and name not starting with F
 - RedisJSON
-    - 
+    - Male senators over 50 years old
+    - Female senators born in 1947
+    - Senators with the name that sounds like Frank (Not sure if we want to show phonic search)
+    - Total Count of Senators in the East Coast
+    - Senators born after 1947 and name not starting with F
 
-- **Write Behind Demo**
-	- Walkthrough
+**Write Behind Demo**
+  - Walkthrough
   
-- **Tear Down cluster assets**
+**Tear Down cluster assets**
 
 Follow up
 --------------------------------------------------
