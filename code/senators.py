@@ -11,9 +11,9 @@ def load():
     return data
 
 def parseState(state):
-    abbr = re.split("\[(.*?)\]", state, 1)
-    print(abbr)
-    return abbr
+    abbr = re.search("(?<=\[.\-).+?(?=\])", state)
+    print(abbr.group())
+    return abbr.group()
 
 def main():
     
