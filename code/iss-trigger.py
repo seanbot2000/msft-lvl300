@@ -28,7 +28,7 @@ def main():
     
     port = 10000
     url = os.getenv('REDIS_ENDPOINT')
-    password = os.environ.get('REDIS_KEY')
+    password = os.getenv('REDIS_KEY')
 
     # Set up Redis connection
     r = redis.StrictRedis(host=url, port=port, password=password)
