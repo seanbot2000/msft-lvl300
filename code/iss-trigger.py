@@ -6,6 +6,7 @@ import redis
 
 from redis.commands.json.path import Path
 from urllib.request import Request, urlopen
+from time import time, sleep
 
 def location():
     req = Request("http://api.open-notify.org/iss-now.json")
@@ -32,10 +33,15 @@ def main():
     r = redis.StrictRedis(host=url, port=port, password=password)
     
     r.json().set('iss:' + str(iss["timestamp"]) , Path.root_path(), iss)
-
+    r.execute_command('LPUSH iss:keys ' + str(iss["timestamp"]))
+    r.execute_command('LTRIM iss:keys 0 9')
+    r.execute_command('GEOADD {iss}:location ' + iss['iss_position']['longitude'] + ' ' + iss['iss_position']['latitude'] + ' current')
     r.close()
 
     print('Python function ran at ' + utc_timestamp)
 
 if __name__=="__main__":
-    main()
+    while True:
+      start_time = time()
+      main()
+      sleep(max(0, 5 * 60 + start_time - time()))

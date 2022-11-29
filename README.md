@@ -103,5 +103,35 @@ FT.SEARCH idx:beers "@abv:[(4 inf]"
 FT.SEARCH idx:beers "@abv:[6 10] @style:Lager -Amber"
 
 **RedisJSON**
-- Query
+- Find all male senators over 50 years old
+FT.SEARCH idx:senators “@gender:(male) 
+
+- Find all female senators born in 1947
+FT.SEARCH idx:senators “@gender:(female) 
+
+- Find the Total Count of Senators in the East Coast
+ FT.AGGREGATE idx:senators "@state:(ME) | @state:(NH) | @state:(MA) | @state:(RI) | @state:(CT) | @state:(NY) | @state:(NJ) | @address:(DE) | @state:(MD) | @state:(VA) | @state:(NC) | @state:(SC) | @state:(GA)| @state:(FL)" GROUPBY 1 @state REDUCE count 0
+
+- Find all senators born after 1947 and name not starting with F
+FT.SEARCH idx:senators “@name:(-F*)
+
+
+**Bonus**
+
+(Using the index iss:<timestamp> and the list of recent keys iss:keys)
+
+Find the distance travelled between the last 2 5 minute intervals of the ISS
+- lrange iss:keys 0 1
+- json.get iss:1669747791 $.iss_position.longitude $.iss_position.latitude
+- geoadd sgn:iss 66.1868 -1.3440 first
+- json.get iss:1669747495 $.iss_position.longitude $.iss_position.latitude
+- geoadd sgn:iss 55.3572 13.5664 second
+- geodist sgn:iss "first" "second" mi
+
+Find the distance from your location to the most recent location of the ISS
+- GEOADD {iss}:sean -94.593530 38.916890 home
+- ZUNIONSTORE {iss}:sean:distance 2 {iss}:location {iss}:sean aggregate min
+- GEODIST {iss}:sean:distance "home" "current" mi
+
+
 
