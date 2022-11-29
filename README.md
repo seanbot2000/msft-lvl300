@@ -1,5 +1,5 @@
-# msft-lvl300
-This is the publicly available repo for MS Learn Level 300 workshop
+# Azure Cache for Redis Hands-on Lab LevelUp Workshop ( L300) 
+This is the publicly available repo for MS Learn Level 300 workshop containing presentation links and workshop outline
 
 **Prerequisites:**
 - Azure Subscription
@@ -10,6 +10,14 @@ This is the publicly available repo for MS Learn Level 300 workshop
 **Expected Infrastructure:**
 - Cluster Group for AA
 - Redis Cluster w/Search + JSON
+
+**Included Code:**
+- code
+  - senators.py - loads senator data in JSON format (depends on senators.json in data dir)
+  - iss-trigger.py - loads current iss data into redis cluster
+  - import.py - leverages the open beer db (https://github.com/redis-developer/redis-datasets/tree/master/redisearch/openbeerdb/beerloader/data)
+
+
   
 Redis Application Workshop Outline
 ------------------------------------------

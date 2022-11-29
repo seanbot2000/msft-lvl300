@@ -15,7 +15,7 @@ style = 'style'
 beer = 'beer'
 brewery = 'brewery'
 
-filepath = './data/'
+filepath = '../data/'
 
 catfile = filepath + 'categories.csv'
 stylefile = filepath + 'styles.csv'
