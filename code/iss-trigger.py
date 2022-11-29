@@ -3,6 +3,7 @@ import logging
 import json
 import json
 import redis
+import os
 
 from redis.commands.json.path import Path
 from urllib.request import Request, urlopen
