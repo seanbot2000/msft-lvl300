@@ -12,7 +12,7 @@ This is the publicly available repo for MS Learn Level 300 workshop containing p
 - Redis Cluster w/Search + JSON
 
 **Included Code:**
-- code
+- --code
   - senators.py - loads senator data in JSON format (depends on senators.json in data dir)
   - iss-trigger.py - loads current iss data into redis cluster
   - import.py - leverages the open beer db (https://github.com/redis-developer/redis-datasets/tree/master/redisearch/openbeerdb/beerloader/data)
@@ -30,7 +30,7 @@ Redis Application Workshop Outline
 	- Stand up ACRE (AA)
     	- https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/quickstart-create-redis-enterprise
     	- https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-how-to-active-geo-replication
-- **Extended Data Types (focus Search + JSON)**
+- **Extended Data Types (focus on RediSearch + RedisJSON)**
   - (Deck continuing) https://docs.google.com/presentation/d/1QAq8o_e3Oqgz1Fgp7cyRDi1OebEuC2f5c2j2nRDSVPw/edit?usp=sharing
 
 Workshop Activities
