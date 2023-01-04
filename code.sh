@@ -43,6 +43,7 @@ redis-cli -h $REDIS_HOST -p 10000 FT.DROPINDEX idx:categories
 redis-cli -h $REDIS_HOST -p 10000 FT.DROPINDEX idx:styles
 redis-cli -h $REDIS_HOST -p 10000 FT.DROPINDEX idx:breweries
 
+: <<'END'
 # create indexes
 p "FT.CREATE idx:beers ON hash PREFIX 1 "beer:" SCHEMA name TEXT SORTABLE brewery TEXT SORTABLE breweryid NUMERIC SORTABLE category TEXT SORTABLE categoryid NUMERIC SORTABLE style TEXT SORTABLE styleid NUMERIC SORTABLE abv NUMERIC SORTABLE"
 redis-cli -h $REDIS_HOST -p 10000 FT.CREATE idx:beers ON hash PREFIX 1 "beer:" SCHEMA name TEXT SORTABLE brewery TEXT SORTABLE breweryid NUMERIC SORTABLE category TEXT SORTABLE categoryid NUMERIC SORTABLE style TEXT SORTABLE styleid NUMERIC SORTABLE abv NUMERIC SORTABLE
@@ -105,28 +106,29 @@ redis-cli -h $REDIS_HOST -p 10000 FT.SEARCH idx:breweries "(@state:florida | @st
 p "FT.AGGREGATE idx:breweries \"@state:California | @state:Oregon | @state:Washington | @state:Alaska | @state:Hawaii\" GROUPBY 1 @state REDUCE count 0"
 redis-cli -h $REDIS_HOST -p 10000 FT.AGGREGATE idx:breweries "@state:California | @state:Oregon | @state:Washington | @state:Alaska | @state:Hawaii" GROUPBY 1 @state REDUCE count 0
 
-# search queries on senators
-p "FT.AGGREGATE idx:senators "@gender:(male)" LOAD 2 @birthday @name APPLY 'floor((parsetime("2022-11-29", "%Y-%m-%d") - parsetime(@birthday, "%Y-%m-%d")) / 31556952)' as Age FILTER "@Age > 50""
-redis-cli -h $REDIS_HOST -p 10000 FT.AGGREGATE idx:senators "@gender:(male)" LOAD 2 @birthday @name APPLY 'floor((parsetime("2022-11-29", "%Y-%m-%d") - parsetime(@birthday, "%Y-%m-%d")) / 31556952)' as Age FILTER "@Age > 50"
-
-p "FT.AGGREGATE idx:senators "@gender:(female)" LOAD 2 @birthday @name APPLY 'timefmt(parsetime(@birthday, "%Y-%m-%d"), "%Y")' as BirthdayYear FILTER "@BirthdayYear == 1947""
-redis-cli -h $REDIS_HOST -p 10000 FT.AGGREGATE idx:senators "@gender:(female)" LOAD 2 @birthday @name APPLY 'timefmt(parsetime(@birthday, "%Y-%m-%d"), "%Y")' as BirthdayYear FILTER "@BirthdayYear == 1947"
-
-p "FT.AGGREGATE idx:senators "@state:(ME) | @state:(NH) | @state:(MA) | @state:(RI) | @state:(CT) | @state:(NY) | @state:(NJ) | @address:(DE) | @state:(MD) | @state:(VA) | @state:(NC) | @state:(SC) | @state:(GA)| @state:(FL)" GROUPBY 1 @state REDUCE count 0"
-redis-cli -h $REDIS_HOST -p 10000 FT.AGGREGATE idx:senators "@state:(ME) | @state:(NH) | @state:(MA) | @state:(RI) | @state:(CT) | @state:(NY) | @state:(NJ) | @address:(DE) | @state:(MD) | @state:(VA) | @state:(NC) | @state:(SC) | @state:(GA)| @state:(FL)" GROUPBY 1 @state REDUCE count 0
-
-p "FT.AGGREGATE idx:senators * LOAD 2 @birthday @name APPLY 'timefmt(parsetime(@birthday, "%Y-%m-%d"), "%Y")' as BirthdayYear FILTER "@BirthdayYear >1947 && substr(@name,5,1) != 'F'""
-redis-cli -h $REDIS_HOST -p 10000 FT.AGGREGATE idx:senators * LOAD 2 @birthday @name APPLY 'timefmt(parsetime(@birthday, "%Y-%m-%d"), "%Y")' as BirthdayYear FILTER "@BirthdayYear >1947 && substr(@name,5,1) != 'F'"
-
+END
 # JSON indexes
 p "FT.CREATE idx:senators ON JSON PREFIX 1 "senator:" SCHEMA $.details.gender AS gender TEXT $.details.birthday AS birthday TAG $.details.name AS name TEXT $.state AS state TEXT"
 redis-cli -h $REDIS_HOST -p 10000 FT.CREATE idx:senators ON JSON PREFIX 1 "senator:" SCHEMA $.details.gender AS gender TEXT $.details.birthday AS birthday TAG $.details.name AS name TEXT $.state AS state TEXT
 
+# search queries on senators
+p "FT.AGGREGATE idx:senators \"@gender:(male)\" LOAD 2 @birthday @name APPLY 'floor((parsetime(\"2022-11-29\", \"%Y-%m-%d\") - parsetime(@birthday, \"%Y-%m-%d\")) / 31556952)' as Age FILTER \"@Age > 50\""
+redis-cli -h $REDIS_HOST -p 10000 FT.AGGREGATE idx:senators "@gender:(male)" LOAD 2 @birthday @name APPLY 'floor((parsetime("2022-11-29", "%Y-%m-%d") - parsetime(@birthday, "%Y-%m-%d")) / 31556952)' as Age FILTER "@Age > 50"
+
+p "FT.AGGREGATE idx:senators \"@gender:(female)\" LOAD 2 @birthday @name APPLY 'timefmt(parsetime(@birthday, \"%Y-%m-%d\"), \"%Y\")' as BirthdayYear FILTER \"@BirthdayYear == 1947\""
+redis-cli -h $REDIS_HOST -p 10000 FT.AGGREGATE idx:senators "@gender:(female)" LOAD 2 @birthday @name APPLY 'timefmt(parsetime(@birthday, "%Y-%m-%d"), "%Y")' as BirthdayYear FILTER "@BirthdayYear == 1947"
+
+p "FT.AGGREGATE idx:senators \"@state:(ME) | @state:(NH) | @state:(MA) | @state:(RI) | @state:(CT) | @state:(NY) | @state:(NJ) | @address:(DE) | @state:(MD) | @state:(VA) | @state:(NC) | @state:(SC) | @state:(GA)| @state:(FL)\" GROUPBY 1 @state REDUCE count 0"
+redis-cli -h $REDIS_HOST -p 10000 FT.AGGREGATE idx:senators "@state:(ME) | @state:(NH) | @state:(MA) | @state:(RI) | @state:(CT) | @state:(NY) | @state:(NJ) | @address:(DE) | @state:(MD) | @state:(VA) | @state:(NC) | @state:(SC) | @state:(GA)| @state:(FL)" GROUPBY 1 @state REDUCE count 0
+
+p "FT.AGGREGATE idx:senators * LOAD 2 @birthday @name APPLY 'timefmt(parsetime(@birthday, \"%Y-%m-%d\"), \"%Y\")' as BirthdayYear FILTER \"@BirthdayYear >1947 && substr(@name,5,1) != 'F'\""
+redis-cli -h $REDIS_HOST -p 10000 FT.AGGREGATE idx:senators * LOAD 2 @birthday @name APPLY 'timefmt(parsetime(@birthday, "%Y-%m-%d"), "%Y")' as BirthdayYear FILTER "@BirthdayYear >1947 && substr(@name,5,1) != 'F'"
+
 # JSON queries
-p "json get senator:Democrat:1023023"
+p "json.get senator:Democrat:1023023"
 redis-cli -h $REDIS_HOST -p 10000 json get senator:Democrat:1023023
 
-p "json set senator:Democrat:1023023 . {"enddate":"2025-01-03","address":"309 Hart Senate Office Building Washington DC 20510","office":"309 Hart Senate Office Building","state":"MA","details":{"birthday":"1949-06-22","gender":"female","name":"Sen. Elizabeth Warren [D-MA]"}""
+p "json.set senator:Democrat:1023023 . {"enddate":"2025-01-03","address":"309 Hart Senate Office Building Washington DC 20510","office":"309 Hart Senate Office Building","state":"MA","details":{"birthday":"1949-06-22","gender":"female","name":"Sen. Elizabeth Warren [D-MA]"}""
 redis-cli -h $REDIS_HOST -p 10000 json set senator:Democrat:1023023 . {"enddate":"2025-01-03","address":"309 Hart Senate Office Building Washington DC 20510","office":"309 Hart Senate Office Building","state":"MA","details":{"birthday":"1949-06-22","gender":"female","name":"Sen. Elizabeth Warren [D-MA]"}"
 
 p "json.set senator:Democrat:1023023 $.details.birthday '{\"birthday\":\"1949-06-22\"}'"
