@@ -20,7 +20,7 @@
 #
 # speed at which to simulate typing. bigger num = faster
 #
-TYPE_SPEED=80
+TYPE_SPEED=30
 
 #
 # custom prompt
@@ -43,7 +43,7 @@ redis-cli -h $REDIS_HOST -p 10000 FT.DROPINDEX idx:categories
 redis-cli -h $REDIS_HOST -p 10000 FT.DROPINDEX idx:styles
 redis-cli -h $REDIS_HOST -p 10000 FT.DROPINDEX idx:breweries
 
-: <<'END'
+#: <<'END'
 # create indexes
 p "FT.CREATE idx:beers ON hash PREFIX 1 "beer:" SCHEMA name TEXT SORTABLE brewery TEXT SORTABLE breweryid NUMERIC SORTABLE category TEXT SORTABLE categoryid NUMERIC SORTABLE style TEXT SORTABLE styleid NUMERIC SORTABLE abv NUMERIC SORTABLE"
 redis-cli -h $REDIS_HOST -p 10000 FT.CREATE idx:beers ON hash PREFIX 1 "beer:" SCHEMA name TEXT SORTABLE brewery TEXT SORTABLE breweryid NUMERIC SORTABLE category TEXT SORTABLE categoryid NUMERIC SORTABLE style TEXT SORTABLE styleid NUMERIC SORTABLE abv NUMERIC SORTABLE
@@ -64,21 +64,22 @@ redis-cli -h $REDIS_HOST -p 10000 FT.SEARCH "idx:beers" IPA
 p "FT.SEARCH "idx:categories" "North American Ales""
 redis-cli -h $REDIS_HOST -p 10000 FT.SEARCH "idx:categories" "North American Ales"
 
-p "redis-cli FT.SEARCH "idx:styles" Amreica"
+p "FT.SEARCH "idx:styles" Amreica"
 redis-cli -h $REDIS_HOST -p 10000 FT.SEARCH "idx:styles" Amreica
 
-p "redis-cli FT.SEARCH "idx:categories" Lager"
+p "FT.SEARCH "idx:categories" Lager"
 redis-cli -h $REDIS_HOST -p 10000 FT.SEARCH "idx:categories" Lager
 
-p "redis-cli FT.SEARCH "idx:styles" "Lager -Amber""
+p "FT.SEARCH "idx:styles" "Lager -Amber""
 redis-cli -h $REDIS_HOST -p 10000 FT.SEARCH "idx:styles" "Lager -Amber"
 
-p "redis-cli FT.SEARCH idx:beers \"@abv:[4 8]\""
+p "FT.SEARCH idx:beers \"@abv:[4 8]\""
 redis-cli -h $REDIS_HOST -p 10000 FT.SEARCH idx:beers "@abv:[4 8]"
 
 p "FT.SEARCH idx:breweries \"@state:Maine | @state:New Hampshire | @state:Massachusetts | @state:Rhode Island | @state:Connecticut | @state:New York | @state:New Jersey | @state: Delaware | @state: Maryland | @state:Virginia | @state:North Carolina | @state:South Carolina | @state: Georgia | @state:Florida\"" 
 redis-cli -h $REDIS_HOST -p 10000 FT.SEARCH idx:breweries "@state:Maine | @state:New Hampshire | @state:Massachusetts | @state:Rhode Island | @state:Connecticut | @state:New York | @state:New Jersey | @state: Delaware | @state: Maryland | @state:Virginia | @state:North Carolina | @state:South Carolina | @state: Georgia | @state:Florida"
 
+: <<'END'
 p "FT.Search idx:beers Pils"
 redis-cli -h $REDIS_HOST -p 10000 FT.Search idx:beers Pils
 
